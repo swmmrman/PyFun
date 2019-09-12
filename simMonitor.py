@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 from os import system
 from tkinter import Tk, Label, Frame, Text
-import tkinter,requests,re
+import tkinter,requests,re,sys
+
+simlist = {
+    'Welcome Center':'http://rs4.taggrid.org:8000/jsonSimStats',
+    'Unknown':'http://rs2.taggrid.org:9100/jsonSimStats'
+}
 
 simName = "Uknown"
 url = 'http://rs2.taggrid.org:9100/jsonSimStats'
@@ -16,6 +21,8 @@ class SimWatcher:
         prims = req['Prims']
         lps = req['ScrLPS']
         (tagV, osV) = req['Version'].split('\n')
+        tagV = tagV.strip()
+        osV = osV.strip()
         statsString = \
             f"Sim FPS:\t\t {fps}\n"\
             f"Visitors:\t\t {agents}\n"\
@@ -31,7 +38,7 @@ class SimWatcher:
         self.simStats.insert(tkinter.INSERT,statsString)
         self.simStats.pack()
         self.master.after(1000, Sim_GUI.main)
-        
+
 
     def __init__(self, master,name,url):
         statsString = "Loading Stats"
@@ -43,13 +50,20 @@ class SimWatcher:
         self.name = name
         self.frame = Frame(self.master)
         master.title(f"Sim stats for {simName}")
-        
+
 
 
 root = Tk()
+if len(sys.argv) == 2:
+    if sys.argv[1] == "w":
+        simName = 'Welcome Center'
+        url = simlist['Welcome Center']
+elif len(sys.argv) == 3:
+    simName = sys.argv[1]
+    url = sys.argv[2]
+
 Sim_GUI = SimWatcher(root, simName, url)
 root.after(1000, Sim_GUI.main)
 root.geometry("400x190+200+200")
 root.mainloop()
 #if __name__ == "__main__":
-    
