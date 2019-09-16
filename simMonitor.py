@@ -2,81 +2,82 @@
 # from os import system
 from tkinter import Tk, Frame, Text
 import tkinter
-import requests
-import re
 import sys
+import re
+import requests
 
-simlist = {
+SIM_LIST = {
     'Welcome Center': 'http://rs4.taggrid.org:8000/jsonSimStats',
     'Unknown': 'http://rs2.taggrid.org:9100/jsonSimStats'
 }
 
-simName = "Uknown"
-url = 'http://rs2.taggrid.org:9100/jsonSimStats'
-
 
 class SimWatcher:
     def main(self):
-        statsString = ''
+        stats_string = ''
         try:
-            req = requests.get(url).json()
+            req = requests.get(self.url).json()
             fps = req['SimFPS']
-            up = req["Uptime"]
-            upt = re.split(r":|\.", up)
+            up_time = req["Uptime"]
+            upt = re.split(r":|\.", up_time)
             if len(upt) == 4:
                 upt.insert(0, 0)
             agents = req['RootAg']
             prims = req['Prims']
             lps = req['ScrLPS']
-            (tagV, osV) = req['Version'].split('\n')
-            tagV = tagV.strip()
-            osV = osV.strip()
-            statsString = \
+            (tag_v, os_v) = req['Version'].split('\n')
+            tag_v = tag_v.strip()
+            os_v = os_v.strip()
+            stats_string = \
                 f"Sim FPS:\t\t {fps}\n"\
                 f"Visitors:\t\t {agents}\n"\
                 f"Prims: \t\t {prims}\n"\
                 f"Script LPS:\t\t {lps}\n"\
-                f"Tag Version:\t\t {tagV}\n"\
-                f"OpenSim Version:\t{osV}\n\n"\
+                f"Tag Version:\t\t {tag_v}\n"\
+                f"OpenSim Version:\t{os_v}\n\n"\
                 f"Sim uptime:\t\t Days:{upt[0]}\n"\
                 f"\t\t Hours:{upt[1]}\n"\
                 f"\t\t Minutes:{upt[2]}\n"\
                 f"\t\t Seconds:{upt[3]}"
         # except ConnectionResetError(args):
-        #    statsString = "Sim restarted"
+        #    stats_string = "Sim restarted"
         except requests.exceptions.RequestException:
-            statsString = f"Could not connect."
+            stats_string = f"Could not connect."
         except ValueError:
-            statsString = f"Invalid json."
+            stats_string = f"Invalid json."
+            print(f"{self.url}")
         finally:
-            self.simStats.delete(1.0, tkinter.END)
-            self.simStats.insert(tkinter.INSERT, statsString)
-            self.simStats.pack()
-            self.master.after(1000, Sim_GUI.main)
+            self.sim_stats.delete(1.0, tkinter.END)
+            self.sim_stats.insert(tkinter.INSERT, stats_string)
+            self.sim_stats.pack()
+            self.master.after(1000, SIM_GUI.main)
 
-    def __init__(self, master, name, url):
-        statsString = "Loading Stats"
-        self.simStats = Text(master)
-        self.simStats.insert(tkinter.INSERT, statsString)
-        self.simStats.pack()
+    def __init__(self, master, name, target):
+        stats_string = "Loading Stats"
+        self.sim_stats = Text(master)
+        self.sim_stats.insert(tkinter.INSERT, stats_string)
+        self.sim_stats.pack()
         self.master = master
-        self.url = url
+        self.url = target
         self.name = name
         self.frame = Frame(self.master)
-        master.title(f"Sim stats for {simName}")
+        master.title(f"Sim stats for {SIM_NAME}")
 
 
-root = Tk()
+ROOT = Tk()
 if len(sys.argv) == 2:
     if sys.argv[1] == "w":
-        simName = 'Welcome Center'
-        url = simlist['Welcome Center']
+        SIM_NAME = 'Welcome Center'
+        URL = SIM_LIST['Welcome Center']
 elif len(sys.argv) == 3:
-    simName = sys.argv[1]
-    url = sys.argv[2]
+    SIM_NAME = sys.argv[1]
+    URL = sys.argv[2]
+else:
+    SIM_NAME = "Uknown"
+    URL = 'http://rs2.taggrid.org:9100/jsonSimStats'
 
-Sim_GUI = SimWatcher(root, simName, url)
-root.after(1000, Sim_GUI.main)
-root.geometry("400x190+200+200")
-root.mainloop()
+SIM_GUI = SimWatcher(ROOT, SIM_NAME, URL)
+ROOT.after(1000, SIM_GUI.main)
+ROOT.geometry("400x190+200+200")
+ROOT.mainloop()
 # if __name__ == "__main__":
