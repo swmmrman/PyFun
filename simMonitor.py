@@ -13,7 +13,12 @@ SIM_LIST = {
 
 
 class SimWatcher:
+    """  Just a class to hold the functions."""
+
     def main(self):
+        """
+        Main loop that fetches the stats. Probably should call this fetch.
+        """
         stats_string = ''
         try:
             req = requests.get(self.url).json()
@@ -42,15 +47,18 @@ class SimWatcher:
         # except ConnectionResetError(args):
         #    stats_string = "Sim restarted"
         except requests.exceptions.RequestException:
-            stats_string = f"Could not connect."
+            self.update("Could not connect.")
         except ValueError:
-            stats_string = f"Invalid json."
-            print(f"{self.url}")
+            self.update(F"Invalid json.")
         finally:
-            self.sim_stats.delete(1.0, tkinter.END)
-            self.sim_stats.insert(tkinter.INSERT, stats_string)
-            self.sim_stats.pack()
-            self.master.after(1000, SIM_GUI.main)
+            self.update(stats_string)
+
+    def update(self, info_string):
+        """ Update the display.  Take a string as and displays it to screen """
+        self.sim_stats.delete(1.0, tkinter.END)
+        self.sim_stats.insert(tkinter.INSERT, info_string)
+        self.sim_stats.pack()
+        self.master.after(1000, SIM_GUI.main)
 
     def __init__(self, master, name, target):
         stats_string = "Loading Stats"
