@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # from os import system
-from tkinter import Tk, Frame, Text
+from tkinter import Tk, Frame, Text, Menu
 import tkinter
 import sys
 import re
@@ -15,9 +15,9 @@ SIM_LIST = {
 class SimWatcher:
     """  Just a class to hold the functions."""
 
-    def main(self):
+    def fetch(self):
         """
-        Main loop that fetches the stats. Probably should call this fetch.
+        Fetch funtion that fetches the stats. Probably should call this fetch.
         """
         stats_string = ''
         try:
@@ -58,17 +58,26 @@ class SimWatcher:
         self.sim_stats.delete(1.0, tkinter.END)
         self.sim_stats.insert(tkinter.INSERT, info_string)
         self.sim_stats.pack()
-        self.master.after(1000, SIM_GUI.main)
+        self.master.after(1000, SIM_GUI.fetch)
+
+    def change_sim(self):
+        """change the active sim"""
+        print(f"{self.name}")
 
     def __init__(self, master, name, target):
         stats_string = "Loading Stats"
+        self.master = master
+        self.top_menu = Menu(self.master)
+        self.file_menu = Menu(self.top_menu, tearoff=0)
+        self.file_menu.add_command(label="Change", command=self.change_sim)
+        self.top_menu.add_cascade(label="File", menu=self.file_menu)
         self.sim_stats = Text(master)
         self.sim_stats.insert(tkinter.INSERT, stats_string)
         self.sim_stats.pack()
-        self.master = master
         self.url = target
         self.name = name
         self.frame = Frame(self.master)
+        self.master.config(menu=self.top_menu)
         master.title(f"Sim stats for {SIM_NAME}")
 
 
@@ -85,7 +94,6 @@ else:
     URL = 'http://rs2.taggrid.org:9100/jsonSimStats'
 
 SIM_GUI = SimWatcher(ROOT, SIM_NAME, URL)
-ROOT.after(1000, SIM_GUI.main)
+ROOT.after(1000, SIM_GUI.fetch)
 ROOT.geometry("400x190+200+200")
 ROOT.mainloop()
-# if __name__ == "__main__":
