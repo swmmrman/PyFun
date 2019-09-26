@@ -22,24 +22,32 @@ class SimWatcher:
         stats_string = ''
         try:
             req = requests.get(self.url).json()
-            fps = req['SimFPS']
             up_time = req["Uptime"]
             upt = re.split(r":|\.", up_time)
             if len(upt) == 4:
                 upt.insert(0, 0)
-            agents = req['RootAg']
-            prims = req['Prims']
             lps = req['ScrLPS']
+            pki = req['PktsIn']
+            pnd_down = req['PendDl']
+            pko = req['PktOut']
+            pnd_up = req['PendUl']
+            stc = req['XEngine Thread Count']
+            utc = req['Util Thread Count']
             (tag_v, os_v) = req['Version'].split('\n')
             tag_v = tag_v.strip()
             os_v = os_v.strip()
             stats_string = \
-                f"Sim FPS:\t\t {fps}\n"\
-                f"Visitors:\t\t {agents}\n"\
-                f"Prims: \t\t {prims}\n"\
-                f"Script LPS:\t\t {lps}\n"\
-                f"Tag Version:\t\t {tag_v}\n"\
-                f"OpenSim Version:\t{os_v}\n\n"\
+                f"Sim FPS:\t\t\t {req['SimFPS']}\n"\
+                f"Visitors:\t\t\t {req['RootAg']}\n"\
+                f"Prims Total/Reg/Mesh: \t\t {req['Prims']}/"\
+                f"{req['GeoPrims']}/{req['Mesh Objects']}\n"\
+                f"Script LPS:\t\t\t {lps}\n"\
+                f"Script Threads:\t\t\t {stc}\n"\
+                f"Util Thread Count:\t\t\t {utc}\n"\
+                f"Packets Int/Pend\t\t\t {pki}/{pnd_down}\n"\
+                f"Packets Out/Pend\t\t\t {pko}/{pnd_up}\n"\
+                f"Tag Version:\t\t\t {tag_v}\n"\
+                f"OpenSim Version:\t\t\t {os_v}\n\n"\
                 f"Sim uptime:\t\t Days:{upt[0]}\n"\
                 f"\t\t Hours:{upt[1]}\n"\
                 f"\t\t Minutes:{upt[2]}\n"\
@@ -95,5 +103,5 @@ else:
 
 SIM_GUI = SimWatcher(ROOT, SIM_NAME, URL)
 ROOT.after(1000, SIM_GUI.fetch)
-ROOT.geometry("400x190+200+200")
+ROOT.geometry("440x265+200+200")
 ROOT.mainloop()
