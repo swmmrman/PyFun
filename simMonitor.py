@@ -49,7 +49,7 @@ class SimWatcher:
         except requests.exceptions.RequestException:
             self.update("Could not connect.")
         except ValueError:
-            self.update(F"Invalid json.")
+            self.update("Invalid json.")
         finally:
             self.update(stats_string)
 
