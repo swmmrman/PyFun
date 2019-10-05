@@ -27,9 +27,11 @@ class SimWatcher:
             if len(upt) == 4:
                 upt.insert(0, 0)
             lps = req['ScrLPS']
-            pki = req['PktsIn']
+            if float(lps) > float(self.maxLPS):
+                self.maxLPS = lps
+            if float(lps) > 1000.0:
+                self.highLPS += 1
             pnd_down = req['PendDl']
-            pko = req['PktOut']
             pnd_up = req['PendUl']
             stc = req['XEngine Thread Count']
             utc = req['Util Thread Count']
@@ -42,10 +44,12 @@ class SimWatcher:
                 f"Prims Total/Reg/Mesh: \t\t {req['Prims']}/"\
                 f"{req['GeoPrims']}/{req['Mesh Objects']}\n"\
                 f"Script LPS:\t\t\t {lps}\n"\
+                f"High LPS Count: \t\t\t {self.highLPS}\n"\
+                f"Max LPS: \t\t\t {self.maxLPS}\n"\
                 f"Script Threads:\t\t\t {stc}\n"\
                 f"Util Thread Count:\t\t\t {utc}\n"\
-                f"Packets Int/Pend\t\t\t {pki}/{pnd_down}\n"\
-                f"Packets Out/Pend\t\t\t {pko}/{pnd_up}\n"\
+                f"Packets Int/Pend\t\t\t {req['PktsIn']}/{pnd_down}\n"\
+                f"Packets Out/Pend\t\t\t {req['PktOut']}/{pnd_up}\n"\
                 f"Tag Version:\t\t\t {tag_v}\n"\
                 f"OpenSim Version:\t\t\t {os_v}\n\n"\
                 f"Sim uptime:\t\t Days:{upt[0]}\n"\
@@ -86,6 +90,8 @@ class SimWatcher:
         self.name = name
         self.frame = Frame(self.master)
         self.master.config(menu=self.top_menu)
+        self.highLPS = 0
+        self.maxLPS = 0
         master.title(f"Sim stats for {SIM_NAME}")
 
 
@@ -103,5 +109,5 @@ else:
 
 SIM_GUI = SimWatcher(ROOT, SIM_NAME, URL)
 ROOT.after(1000, SIM_GUI.fetch)
-ROOT.geometry("440x265+200+200")
+#ROOT.geometry("465x265+200+200")
 ROOT.mainloop()
