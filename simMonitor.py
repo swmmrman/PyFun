@@ -31,6 +31,8 @@ class SimWatcher:
                 self.maxLPS = lps
             if float(lps) > 1000.0:
                 self.highLPS += 1
+            if float(req['SimFPS']) < 1:
+                self.zeroFPS += 1
             pnd_down = req['PendDl']
             pnd_up = req['PendUl']
             stc = req['XEngine Thread Count']
@@ -39,7 +41,7 @@ class SimWatcher:
             tag_v = tag_v.strip()
             os_v = os_v.strip()
             stats_string = \
-                f"Sim FPS:\t\t\t {req['SimFPS']}\n"\
+                f"Sim FPS:\t\t\t {req['SimFPS']}/{self.zeroFPS}\n"\
                 f"Visitors:\t\t\t {req['RootAg']}\n"\
                 f"Prims Total/Reg/Mesh: \t\t {req['Prims']}/"\
                 f"{req['GeoPrims']}/{req['Mesh Objects']}\n"\
@@ -92,6 +94,7 @@ class SimWatcher:
         self.master.config(menu=self.top_menu)
         self.highLPS = 0
         self.maxLPS = 0
+        self.zeroFPS = 0
         master.title(f"Sim stats for {SIM_NAME}")
 
 
