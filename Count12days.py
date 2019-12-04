@@ -1,3 +1,8 @@
+#!/ysr/env python3
+"""This is a short silly script to count the number of gifts in the 12 days of
+   of Christmas
+"""
+
 from time import sleep
 
 gifts = [0,0,0,0,0,0,
@@ -14,9 +19,17 @@ for day in range(0,12):
 total = 0;
 for i in gifts:
 	total += i
-	
-			
-print(
-f"Partridges:{gifts[0]}\n"\
-f"Turtle Doves:{gifts[1]}\n"\
-f"Total {total}")
+
+GIFTSSTRING = \
+    F"Partridges and Pear Trees:\t{gifts[0]}\n"\
+    F"Turtle Doves:\t\t{gifts[1]}\n"\
+    F"French Hens:\t\t{gifts[2]}\n"\
+    F"Calling Birds:\t\t{gifts[3]}\n"\
+    F"Golden Rings:\t\t{gifts[4]}\n"\
+    F"Geese a-laying:\t{gifts[5]}\n"\
+    F"swans a-swimming:{gifts[6]}\n"\
+    F"French Hens:{gifts[7]}\n"\
+    F"French Hens:{gifts[8]}\n"\
+    F"Total {total}"
+    
+print(GIFTSSTRING)
