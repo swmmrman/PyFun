@@ -53,7 +53,7 @@ def blink(color, lights):
                 if color == "blue":
                     tree[light] = f"\033[94m•\033[0m"
             else:
-                tree[light] = "•"
+                tree[light] = "\033[90m•\033[0m"
         sleep(frametime*2)
 
 
