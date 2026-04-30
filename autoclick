@@ -1,0 +1,5 @@
+#!/bin/bash
+
+pushd /home/stephan/Coding/PyFun/
+source venv-clicker/bin/activate
+python autoclick.py 500000
