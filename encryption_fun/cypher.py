@@ -26,3 +26,7 @@ class cypher:
 
     def add_text(self, text):
         self.text += text
+
+    def load_temp(self):
+        with open('cyphers.txt', "r") as file:
+            self.text = file.read()
