@@ -14,5 +14,5 @@ class cypher:
     def revert(self):
         self.key = self.old_key
 
-    self.add_text(self, text):
+    def add_text(self, text):
         self.text += text
