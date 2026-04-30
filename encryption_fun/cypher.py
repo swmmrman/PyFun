@@ -1,8 +1,9 @@
 class cypher:
-    def __init__(self):
+    def __init__(self, text=""):
         self.ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.\"')(=:"
         self.key = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.\"')(=:"
-        self.text = ""
+        self.text = text
+        self.old_key = ""
 
     def decrypt(self) -> str:
         return self.text
