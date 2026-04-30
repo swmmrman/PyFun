@@ -18,8 +18,7 @@ class cypher:
 
     def update(self, a, b):
         self.old_key = self.key
-        index = self.ALPHA.find(a.upper())
-        self.key[index] = b
+        self.key = self.key.replace(a.upper(), b)
 
     def revert(self):
         self.key = self.old_key
