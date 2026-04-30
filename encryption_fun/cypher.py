@@ -8,7 +8,13 @@ class cypher:
         self.old_key = ""
 
     def decrypt(self) -> str:
-        return self.text
+        outstring = ""
+        for char in self.text:
+            if char == "\n":
+                outstring += "\n"
+            else:
+                outstring += self.key[self.ALPHA.find(char.upper())]
+        return outstring
 
     def update(self, a, b):
         self.old_key = self.key
