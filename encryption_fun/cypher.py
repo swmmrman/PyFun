@@ -1,8 +1,8 @@
 class cypher:
     def __init__(self, text=""):
-        self.ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.\"')(=:"
-        self.key = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.\"')(=:"
-        #self.key = "kxvmcnophqrszyijadlegwbuft ,.\"')(=:"
+        self.ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ !,.\"')(=:"
+        self.key = "ABCDEFGHIJKLMNOPQRSTUVWXYZ !,.\"')(=:"
+        # self.key = "kxvmcnophqrszyijadlegwbuft !,.\"')(=:"
         if len(text) > 0:
             self.text = text
         self.old_key = ""
