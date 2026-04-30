@@ -27,5 +27,5 @@ class cypher:
         self.text += text
 
     def load_temp(self):
-        with open('cyphers.txt', "r") as file:
+        with open("cyphers.txt", "r") as file:
             self.text = file.read()
