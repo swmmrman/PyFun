@@ -2,7 +2,9 @@ class cypher:
     def __init__(self, text=""):
         self.ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.\"')(=:"
         self.key = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.\"')(=:"
-        self.text = text
+        #self.key = "kxvmcnophqrszyijadlegwbuft ,.\"')(=:"
+        if len(text) > 0:
+            self.text = text
         self.old_key = ""
 
     def decrypt(self) -> str:
