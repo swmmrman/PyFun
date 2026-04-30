@@ -37,9 +37,15 @@ class SimWatcher:
             pnd_up = req['PendUl']
             stc = req['XEngine Thread Count']
             utc = req['Util Thread Count']
-            (tag_v, os_v) = req['Version'].split('\n')
-            tag_v = tag_v.strip()
-            os_v = os_v.strip()
+            try:
+                (tag_v, os_v) = req['Version'].split('\n')
+                tag_v = tag_v.strip()
+                os_v = os_v.strip()
+            except ValueError:
+                tag_v = req['Version']
+                tag_v = tag_v.strip()
+                os_v = tag_v
+
             stats_string = \
                 f"Sim FPS:\t\t\t {req['SimFPS']}/{self.zeroFPS}\n"\
                 f"Visitors:\t\t\t {req['RootAg']}\n"\
