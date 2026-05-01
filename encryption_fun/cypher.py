@@ -1,7 +1,7 @@
 class cypher:
     A_Z_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-    def __init__(self, text="", file="ceaser.txt"):
+    def __init__(self, text="", file="ciphers.txt"):
         self.ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ !,.\"')(=:?"
         self.key = "ABCDEFGHIJKLMNOPQRSTUVWXYZ !,.\"')(=:?"
         # self.key = "kxvmcnophqrszyijadlegwbuft !,.\"')(=:?"
