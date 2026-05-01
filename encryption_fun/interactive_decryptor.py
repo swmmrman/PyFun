@@ -18,6 +18,13 @@ def run_command(input, cypher: cypher.cypher):
         case "quit" | "q":
             print("goodbye")
             running = False
+        case "ceaser_decrypt" | "cd":
+            print(c.ceaser_decrypt(int(parts[1])))
+        case "reset" | "r":
+            c.reset()
+            c.print_decrypted()
+        case "offsets":
+            print(c.decrypted_offsets)
         case _:
             print(f"{command} not recognized. h or help to print help")
 
