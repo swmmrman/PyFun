@@ -35,6 +35,18 @@ class cypher:
         self.key = self.key.replace(a.upper(), b)
         self.decrypted_text = self.decrypt()
 
+    def multi_update(self, a, b):
+        length = len(a)
+        if len(b) != length:
+            print("size of strings must match")
+        for i in range(0, length):
+            self.decrypted_offsets.append(
+                cypher.A_Z_ALPHA.find(a[i].upper())
+                - cypher.A_Z_ALPHA.find(b[i].upper())
+            )
+            self.key = self.key.replace(a[i].upper(), b[i])
+            self.decrypted_text = self.decrypt()
+
     def revert(self):
         self.key = self.old_key
         self.decrypted_offsets.pop(-1)

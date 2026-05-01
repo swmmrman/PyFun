@@ -15,6 +15,11 @@ def run_command(input, cypher: cypher.cypher):
             print(check)
             if check != {}:
                 print(f"Possible Ceaser cipher {check}")
+        case "mutli" | "m":
+            cypher.multi_update(parts[1], parts[2])
+            check = cypher.ceaser_check()
+            if check != {}:
+                print(f"Possible Ceaser cipher {check}")
         case "quit" | "q":
             print("goodbye")
             running = False
