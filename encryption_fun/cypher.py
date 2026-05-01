@@ -65,5 +65,10 @@ class cypher:
                 outstring += char
         return outstring
 
-
-    def ceaser_check(self):
+    def ceaser_check(self) -> dict:
+        possible_offsets = {}
+        for i in self.decrypted_offsets:
+            occurences = self.decrypted_offsets.count(i)
+            if occurences > 3:
+                possible_offsets.update({i: occurences})
+        return possible_offsets
