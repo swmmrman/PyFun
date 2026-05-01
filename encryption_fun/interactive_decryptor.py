@@ -5,7 +5,7 @@ import cypher
 def run_command(input, cypher: cypher.cypher):
     global running
     parts = input.split(" ")
-    command = parts[0]
+    command = parts[0].lower()
     match command:
         case "print" | "p":
             cypher.print_decrypted()
