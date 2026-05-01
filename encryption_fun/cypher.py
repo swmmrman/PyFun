@@ -17,6 +17,9 @@ class cypher:
                 outstring += self.key[self.ALPHA.find(char.upper())]
         return outstring
 
+    def print_decrypted(self):
+        print(self.decrypted_text)
+
     def update(self, a, b):
         self.old_key = self.key
         self.key = self.key.replace(a.upper(), b)
