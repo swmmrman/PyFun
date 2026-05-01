@@ -18,6 +18,8 @@ class cypher:
         for char in self.text:
             if char == "\n":
                 outstring += "\n"
+            elif char.upper() not in self.ALPHA:
+                outstring += char
             else:
                 if char.isupper():
                     outstring += self.key[self.ALPHA.find(char.upper())].upper()
