@@ -59,6 +59,6 @@ c.print_decrypted()
 
 running = True
 while running:
-    print("Command:")
+    print("Command:", end="")
     command = input()
     run_command(command, c)
