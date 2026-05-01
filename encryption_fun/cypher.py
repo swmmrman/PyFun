@@ -6,6 +6,7 @@ class cypher:
         if len(text) > 0:
             self.text = text
         self.old_key = ""
+        self.decrypted_text = ""
 
     def decrypt(self) -> str:
         outstring = ""
@@ -19,6 +20,7 @@ class cypher:
     def update(self, a, b):
         self.old_key = self.key
         self.key = self.key.replace(a.upper(), b)
+        self.decrypted_text = self.decrypt()
 
     def revert(self):
         self.key = self.old_key
