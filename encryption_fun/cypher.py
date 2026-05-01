@@ -80,6 +80,6 @@ class cypher:
         return possible_offsets
 
     def reset(self):
-        self.decrypted_text = self.text
-        self.decrypted_offsets = []
         self.key = self.ALPHA
+        self.decrypted_text = self.decrypt()
+        self.decrypted_offsets = []
