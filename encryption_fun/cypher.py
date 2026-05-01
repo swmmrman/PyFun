@@ -18,7 +18,10 @@ class cypher:
             if char == "\n":
                 outstring += "\n"
             else:
-                outstring += self.key[self.ALPHA.find(char.upper())]
+                if char.isupper():
+                    outstring += self.key[self.ALPHA.find(char.upper())].upper()
+                else:
+                    outstring += self.key[self.ALPHA.find(char.upper())]
         return outstring
 
     def print_decrypted(self):
@@ -60,7 +63,10 @@ class cypher:
             cap_char = char.upper()
             if cap_char in cypher.A_Z_ALPHA:
                 index = (cypher.A_Z_ALPHA.find(cap_char) + shift) % 26
-                outstring += cypher.A_Z_ALPHA[index]
+                if char.isupper():
+                    outstring += cypher.A_Z_ALPHA[index]
+                else:
+                    outstring += cypher.A_Z_ALPHA[index].lower()
             else:
                 outstring += char
         return outstring
