@@ -39,6 +39,7 @@ class cypher:
         length = len(a)
         if len(b) != length:
             print("size of strings must match")
+            return
         for i in range(0, length):
             self.decrypted_offsets.append(
                 cypher.A_Z_ALPHA.find(a[i].upper())

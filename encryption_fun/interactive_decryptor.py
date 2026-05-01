@@ -10,12 +10,18 @@ def run_command(input, cypher: cypher.cypher):
         case "print" | "p":
             cypher.print_decrypted()
         case "update" | "u":
+            if len(parts) < 3:
+                print("Missing opperand")
+                return
             cypher.update(parts[1], parts[2])
             check = cypher.ceaser_check()
             print(check)
             if check != {}:
                 print(f"Possible Ceaser cipher {check}")
         case "mutli" | "m":
+            if len(parts) < 3:
+                print("Missing opperand")
+                return
             cypher.multi_update(parts[1], parts[2])
             check = cypher.ceaser_check()
             if check != {}:
@@ -24,6 +30,9 @@ def run_command(input, cypher: cypher.cypher):
             print("goodbye")
             running = False
         case "ceaser_decrypt" | "cd":
+            if len(parts) < 2:
+                print("Missing shift")
+            return
             print(c.ceaser_decrypt(int(parts[1])))
         case "reset" | "r":
             c.reset()
