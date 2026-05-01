@@ -28,6 +28,14 @@ class cypher:
     def revert(self):
         self.key = self.old_key
 
+    def revert_letter(self, letter, one=True):
+        self.old = self.key
+        index = self.key.find(letter)
+        count = 1
+        if not one:
+            count = -1
+        self.key = self.key.replace(letter, self.ALPHA[index], count)
+
     def add_text(self, text):
         self.text += text
 
