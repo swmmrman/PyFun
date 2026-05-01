@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import random
 import sys
 
 encodes = [
@@ -74,6 +75,7 @@ encodes = [
 CYPHER = "kxvmcnophqrszyijadlegwbuft '.,?!:=*"
 KEY = "qwertyuiopasdfghjklzxcvbnm  '.,?!:=*"
 ALPHA = "abcdefghijklmnopqrstuvwxyz '.,?!:=*"
+ALPHA_A_Z = "abcdefghijklmnopqrstuvwxyz"
 
 
 def encode(clear_text: str):
@@ -120,6 +122,31 @@ def encode_loop():
         print(encode(input()))
 
 
+def random_encode(in_file: str, out_file: str):
+    clear_text = ""
+    with open(in_file, "r") as file:
+        clear_text = file.read()
+    alpha_list = list(ALPHA_A_Z)
+    random.shuffle(alpha_list)
+    key = "".join(alpha_list)
+    enciphered = ""
+    for char in clear_text:
+        if char == "\n":
+            enciphered += "\n"
+            continue
+        if char.lower() not in key:
+            enciphered += char
+            continue
+        if char.isupper():
+            enciphered += key[ALPHA_A_Z.find(char.lower())].upper()
+        else:
+            enciphered += key[ALPHA_A_Z.find(char.lower())]
+    with open(out_file, "w") as file2:
+        file2.write(enciphered)
+        file2.close()
+        file.close()
+
+
 if len(sys.argv) >= 2:
     if sys.argv[1] == "decode":
         print(decode(sys.argv[2]))
@@ -131,9 +158,12 @@ if len(sys.argv) >= 2:
         encode_loop()
     elif sys.argv[1] == "all":
         print(decode_all(encodes))
+    elif sys.argv[1] == "fencode":
+        random_encode(sys.argv[2], sys.argv[3])
     else:
         print(
             f'Usage: {sys.argv[0]} command "string"\nThe string needs to be in quotes\nCommands:\n\tdecode: decodes\n\tencode: encodes the string\n\tiencode: Interactive encoder\n\t idecode: interactive decoder'
         )
+
 else:
     decode_loop()
