@@ -1,5 +1,5 @@
 class cypher:
-    def __init__(self, text=""):
+    def __init__(self, text="", file="cyphers.txt"):
         self.ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ !,.\"')(=:?"
         self.key = "ABCDEFGHIJKLMNOPQRSTUVWXYZ !,.\"')(=:?"
         # self.key = "kxvmcnophqrszyijadlegwbuft !,.\"')(=:?"
@@ -7,6 +7,7 @@ class cypher:
             self.text = text
         self.old_key = ""
         self.decrypted_text = ""
+        self.load_file(file)
 
     def decrypt(self) -> str:
         outstring = ""
@@ -39,7 +40,7 @@ class cypher:
     def add_text(self, text):
         self.text += text
 
-    def load_temp(self):
-        with open("cyphers.txt", "r") as file:
+    def load_file(self, file):
+        with open(file, "r") as file:
             self.text = file.read()
             self.decrypted_text = self.decrypt()
