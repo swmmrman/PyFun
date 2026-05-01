@@ -1,7 +1,7 @@
 class cypher:
     A_Z_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-    def __init__(self, text="", file="cyphers.txt"):
+    def __init__(self, text="", file="ceaser.txt"):
         self.ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ !,.\"')(=:?"
         self.key = "ABCDEFGHIJKLMNOPQRSTUVWXYZ !,.\"')(=:?"
         # self.key = "kxvmcnophqrszyijadlegwbuft !,.\"')(=:?"
@@ -52,5 +52,18 @@ class cypher:
             self.text = file.read()
             self.decrypted_text = self.decrypt()
 
+    ### shift is the ceaser shift
+    def ceaser_decrypt(self, shift) -> str:
+        shift = 0 - shift
+        outstring = ""
+        for char in self.text:
+            cap_char = char.upper()
+            if cap_char in cypher.A_Z_ALPHA:
+                index = (cypher.A_Z_ALPHA.find(cap_char) + shift) % 26
+                outstring += cypher.A_Z_ALPHA[index]
+            else:
+                outstring += char
+        return outstring
 
-#    def ceaser_check(self):
+
+    def ceaser_check(self):
