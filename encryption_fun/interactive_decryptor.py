@@ -9,13 +9,16 @@ def run_command(input, cypher: cypher.cypher):
     match command:
         case "print" | "p":
             cypher.print_decrypted()
+        case "print_key" | "pk":
+            print(c.key)
+        case "print_key_sorted" | "pks":
+            print(sorted(c.key))
         case "update" | "u":
             if len(parts) < 3:
                 print("Missing opperand")
                 return
             cypher.update(parts[1], parts[2])
             check = cypher.ceaser_check()
-            print(check)
             if check != {}:
                 print(f"Possible Ceaser cipher {check}")
         case "mutli" | "m":
