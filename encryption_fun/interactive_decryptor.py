@@ -34,7 +34,9 @@ def run_command(input, cypher: cypher.cypher):
                 print("Missing shift")
             return
             print(c.ceaser_decrypt(int(parts[1])))
-        case "reset" | "r":
+        case "revert" | "r":
+            c.revert()
+        case "reset":
             c.reset()
             c.print_decrypted()
         case "offsets":

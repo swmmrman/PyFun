@@ -11,6 +11,7 @@ class cypher:
         self.decrypted_text = ""
         self.load_file(file)
         self.decrypted_offsets = []
+        self.last_decrypted_offsets = 1
 
     def decrypt(self) -> str:
         outstring = ""
@@ -32,6 +33,7 @@ class cypher:
         self.decrypted_offsets.append(
             cypher.A_Z_ALPHA.find(a.upper()) - cypher.A_Z_ALPHA.find(b.upper())
         )
+        self.last_decrypted_offsets = 1
         self.key = self.key.replace(a.upper(), b)
         self.decrypted_text = self.decrypt()
 
@@ -40,17 +42,27 @@ class cypher:
         if len(b) != length:
             print("size of strings must match")
             return
+        self.old_key = self.key
+        self.last_decrypted_offsets = 0
         for i in range(0, length):
-            self.decrypted_offsets.append(
-                cypher.A_Z_ALPHA.find(a[i].upper())
-                - cypher.A_Z_ALPHA.find(b[i].upper())
+            offset = cypher.A_Z_ALPHA.find(a[i].upper()) - cypher.A_Z_ALPHA.find(
+                b[i].upper()
             )
+            self.decrypted_offsets.append(offset)
+            self.last_decrypted_offsets += 1
             self.key = self.key.replace(a[i].upper(), b[i])
             self.decrypted_text = self.decrypt()
 
     def revert(self):
+        if self.old_key == "":
+            print("No reverts available")
+            return
         self.key = self.old_key
-        self.decrypted_offsets.pop(-1)
+        self.old_key = ""
+        for _ in range(0, self.last_decrypted_offsets):
+            self.decrypted_offsets.pop(-1)
+        self.last_decrypted_offsets = 0
+        self.decrypted_text = self.decrypt()
 
     def revert_letter(self, letter, one=True):
         self.old = self.key
