@@ -42,3 +42,4 @@ class cypher:
     def load_temp(self):
         with open("cyphers.txt", "r") as file:
             self.text = file.read()
+            self.decrypted_text = self.decrypt()
