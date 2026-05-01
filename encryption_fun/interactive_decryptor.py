@@ -3,6 +3,7 @@ import cypher
 
 
 def run_command(input, cypher: cypher.cypher):
+    global running
     parts = input.split(" ")
     command = parts[0]
     match command:
@@ -10,6 +11,9 @@ def run_command(input, cypher: cypher.cypher):
             cypher.print_decrypted()
         case "update" | "u":
             cypher.update(parts[1], parts[2])
+        case "quit" | "q":
+            print("goodbye")
+            running = False
         case _:
             print(f"{command} not recognized. h or help to print help")
 
