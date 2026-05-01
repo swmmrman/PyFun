@@ -72,3 +72,8 @@ class cypher:
             if occurences > 3:
                 possible_offsets.update({i: occurences})
         return possible_offsets
+
+    def reset(self):
+        self.decrypted_text = self.text
+        self.decrypted_offsets = []
+        self.key = self.ALPHA
