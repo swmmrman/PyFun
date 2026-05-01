@@ -35,7 +35,7 @@ def run_command(input, cypher: cypher.cypher):
         case "ceaser_decrypt" | "cd":
             if len(parts) < 2:
                 print("Missing shift")
-            return
+                return
             print(c.ceaser_decrypt(int(parts[1])))
         case "revert" | "r":
             c.revert()
