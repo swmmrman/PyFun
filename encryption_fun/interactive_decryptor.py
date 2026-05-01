@@ -2,9 +2,16 @@
 import cypher
 
 
-def run_command(command, cypher: cypher.cypher):
-    parts = command.split(" ")
-    print(parts)
+def run_command(input, cypher: cypher.cypher):
+    parts = input.split(" ")
+    command = parts[0]
+    match command:
+        case "print" | "p":
+            cypher.print_decrypted()
+        case "update" | "u":
+            cypher.update(parts[1], parts[2])
+        case _:
+            print(f"{command} not recognized. h or help to print help")
 
 
 print("File to read from: [ciphers.txt]")
