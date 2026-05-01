@@ -11,6 +11,10 @@ def run_command(input, cypher: cypher.cypher):
             cypher.print_decrypted()
         case "update" | "u":
             cypher.update(parts[1], parts[2])
+            check = cypher.ceaser_check()
+            print(check)
+            if check != {}:
+                print(f"Possible Ceaser cipher {check}")
         case "quit" | "q":
             print("goodbye")
             running = False
