@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import random
 import subprocess
 
 
@@ -10,9 +11,17 @@ def get_quotes(count: int):
 
 
 def random_encode(in_str: str):
+    coin = random.randint(0, 1)
+    outstring = ""
+    if coin:
+        outstring = ceaser_encrypt(in_str, random.randint(26))
+    else:
+        outstring = atbash_encyrpt(in_str)
+    return outstring
+
 
 # def read_file():
-test_text  = '''
+test_text = """
 A horse breeder has his young colts bottle-fed after they're three
 days old.  He heard that a foal and his mummy are soon parted.
 
@@ -22,4 +31,4 @@ Making one brilliant decision and a whole bunch of mediocre ones isn't as
 good as making a whole bunch of generally smart decisions throughout the
 whole process.
 		-- John Carmack
-'''
+"""
