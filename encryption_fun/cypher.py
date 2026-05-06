@@ -1,6 +1,7 @@
-class cypher:
-    A_Z_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+A_Z_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
+
+class cypher:
     def __init__(self, text="", file="ciphers.txt"):
         self.ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ !,.\"')(=:?"
         self.key = "ABCDEFGHIJKLMNOPQRSTUVWXYZ !,.\"')(=:?"
@@ -34,7 +35,7 @@ class cypher:
     def update(self, a, b):
         self.old_key = self.key
         self.decrypted_offsets.append(
-            cypher.A_Z_ALPHA.find(a.upper()) - cypher.A_Z_ALPHA.find(b.upper())
+            A_Z_ALPHA.find(a.upper()) - A_Z_ALPHA.find(b.upper())
         )
         self.last_decrypted_offsets = 1
         self.key = self.key.replace(a.upper(), b)
@@ -48,9 +49,7 @@ class cypher:
         self.old_key = self.key
         self.last_decrypted_offsets = 0
         for i in range(0, length):
-            offset = cypher.A_Z_ALPHA.find(a[i].upper()) - cypher.A_Z_ALPHA.find(
-                b[i].upper()
-            )
+            offset = A_Z_ALPHA.find(a[i].upper()) - A_Z_ALPHA.find(b[i].upper())
             self.decrypted_offsets.append(offset)
             self.last_decrypted_offsets += 1
             self.key = self.key.replace(a[i].upper(), b[i])
@@ -89,12 +88,12 @@ class cypher:
         outstring = ""
         for char in self.text:
             cap_char = char.upper()
-            if cap_char in cypher.A_Z_ALPHA:
-                index = (cypher.A_Z_ALPHA.find(cap_char) + shift) % 26
+            if cap_char in A_Z_ALPHA:
+                index = (A_Z_ALPHA.find(cap_char) + shift) % 26
                 if char.isupper():
-                    outstring += cypher.A_Z_ALPHA[index]
+                    outstring += A_Z_ALPHA[index]
                 else:
-                    outstring += cypher.A_Z_ALPHA[index].lower()
+                    outstring += A_Z_ALPHA[index].lower()
             else:
                 outstring += char
         return outstring
@@ -117,11 +116,13 @@ def ceaser_encrypt(text: str, offset: int):
     outstring = ""
     for char in text:
         caps = char.isupper()
-        index = (cypher.A_Z_ALPHA.find(char.upper()) + offset) % 26
-        new_char = cypher.A_Z_ALPHA[index]
+        index = (A_Z_ALPHA.find(char.upper()) + offset) % 26
+        new_char = A_Z_ALPHA[index]
         if not caps:
             new_char = new_char.lower()
         outstring += new_char
     return outstring
 
-    # def
+
+def atbash_encrypt(in_str: str, key: str):
+    return in_str
