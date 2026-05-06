@@ -8,8 +8,9 @@ class cypher:
         # self.key = "kxvmcnophqrszyijadlegwbuft !,.\"')(=:?"
         self.old_key = ""
         self.decrypted_text = ""
+        self.text = ""
         if len(text) > 0:
-            self.text = text
+            self.add_text(text)
         else:
             self.load_file(file)
         self.decrypted_offsets = []
