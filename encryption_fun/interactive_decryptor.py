@@ -44,6 +44,10 @@ def run_command(input, cypher: cypher.cypher):
             c.print_decrypted()
         case "offsets":
             print(c.decrypted_offsets)
+        case "load_text" | "lt":
+            c.add_text(" ".join(parts[1:]))
+        case "clear_text" | "ct":
+            c.clear_text()
         case _:
             print(f"{command} not recognized. h or help to print help")
 
