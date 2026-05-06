@@ -7,9 +7,10 @@ class cypher:
         # self.key = "kxvmcnophqrszyijadlegwbuft !,.\"')(=:?"
         if len(text) > 0:
             self.text = text
+        else:
+            self.load_file(file)
         self.old_key = ""
         self.decrypted_text = ""
-        self.load_file(file)
         self.decrypted_offsets = []
         self.last_decrypted_offsets = 1
 
