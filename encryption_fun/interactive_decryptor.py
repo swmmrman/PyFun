@@ -58,9 +58,9 @@ cipher = ""
 if not sys.stdin.isatty():
     for line in sys.stdin:
         cipher += line
-        c = cypher.cypher(text=cipher)
-        old_stdin = sys.stdin
-        sys.stdin = open("/dev/tty")
+    old_stdin = sys.stdin
+    sys.stdin = open("/dev/tty")
+    c = cypher.cypher(text=cipher)
 else:
     print("File to read from: [ciphers.txt]")
     ans = input()
