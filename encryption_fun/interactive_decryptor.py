@@ -4,6 +4,22 @@ import sys
 import cypher
 
 
+def print_help():
+    str = """Commands
+Command    shortcut
+print      p         Print the current decrypted text
+print_key  pk        Print the current key
+update     u a b     Update the a = Encypted leter, b = decrypted
+multi      m a b     update multiple at the same time.
+quit       q         quit
+revert     r         Undo the last operation.
+reset                Reset the cipher.
+offsets              Print the current offsets
+save [x]   s [x]     Save to file [x]
+"""
+    print(str)
+
+
 def run_command(input, cypher: cypher.cypher):
     global running
     parts = input.split(" ")
@@ -52,6 +68,8 @@ def run_command(input, cypher: cypher.cypher):
             c.clear_text()
         case "save" | "s":
             c.save(parts[1])
+        case "help" | "h":
+            print_help()
         case _:
             print(f"{command} not recognized. h or help to print help")
 
