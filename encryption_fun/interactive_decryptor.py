@@ -64,6 +64,8 @@ def run_command(input, cypher: cypher.cypher):
             print(c.decrypted_offsets)
         case "load_text" | "lt":
             c.add_text(" ".join(parts[1:]))
+        case "add_text_block" | "atb":
+            c.add_text_block()
         case "clear_text" | "ct":
             c.clear_text()
         case "save" | "s":

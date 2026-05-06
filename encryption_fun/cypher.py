@@ -79,6 +79,21 @@ class cypher:
         self.text += text
         self.reset()
 
+    def add_text_block(self):
+        self.text = ""
+        print("Paste content.  CRTL-D to end")
+        inputing = True
+        in_text = ""
+        while inputing:
+            new_line = ""
+            try:
+                new_line = input()
+            except EOFError:
+                inputing = False
+            in_text += new_line + "\n"
+        self.text = in_text
+        self.reset()
+
     def clear_text(self):
         self.text = ""
         self.reset()
