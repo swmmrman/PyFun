@@ -63,6 +63,14 @@ class cypher:
         self.text = ""
         self.reset()
 
+    def count_chars(self):
+        print("Character counts:")
+        upper_text = self.text.upper()
+        for char in A_Z_ALPHA:
+            count = upper_text.count(char)
+            print(f"{char}:{count} ", end="")
+        print("")
+
     def decrypt(self) -> str:
         outstring = ""
         for char in self.text:
@@ -98,6 +106,9 @@ class cypher:
 
     def print_decrypted(self):
         print(self.decrypted_text)
+
+    def print_text(self):
+        print(self.text)
 
     def reset(self):
         self.key = self.ALPHA

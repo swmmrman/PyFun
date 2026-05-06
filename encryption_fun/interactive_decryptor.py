@@ -68,6 +68,10 @@ def run_command(input, cypher: cypher.cypher):
             c.add_text_block()
         case "clear_text" | "ct":
             c.clear_text()
+        case "count_chars" | "cc":
+            c.count_chars()
+        case "print_text" | "pt":
+            c.print_text()
         case "save" | "s":
             c.save(parts[1])
         case "save_Decrypted" | "sd":
