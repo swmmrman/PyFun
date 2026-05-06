@@ -13,8 +13,7 @@ def get_quotes(count: int):
 
 
 def random_encode(in_str: str):
-    coin = 1
-    # coin = random.randint(0, 1)
+    coin = random.randint(0, 1)
     outstring = ""
     if coin:
         outstring = cypher.ceaser_encrypt(in_str, random.randint(0, 26))
