@@ -33,15 +33,6 @@ class cypher:
     def print_decrypted(self):
         print(self.decrypted_text)
 
-    def update(self, a, b):
-        self.old_key = self.key
-        self.decrypted_offsets.append(
-            A_Z_ALPHA.find(a.upper()) - A_Z_ALPHA.find(b.upper())
-        )
-        self.last_decrypted_offsets = 1
-        self.key = self.key.replace(a.upper(), b)
-        self.decrypted_text = self.decrypt()
-
     def multi_update(self, a, b):
         length = len(a)
         if len(b) != length:
@@ -55,25 +46,6 @@ class cypher:
             self.last_decrypted_offsets += 1
             self.key = self.key.replace(a[i].upper(), b[i])
             self.decrypted_text = self.decrypt()
-
-    def revert(self):
-        if self.old_key == "":
-            print("No reverts available")
-            return
-        self.key = self.old_key
-        self.old_key = ""
-        for _ in range(0, self.last_decrypted_offsets):
-            self.decrypted_offsets.pop(-1)
-        self.last_decrypted_offsets = 0
-        self.decrypted_text = self.decrypt()
-
-    def revert_letter(self, letter, one=True):
-        self.old = self.key
-        index = self.key.find(letter)
-        count = 1
-        if not one:
-            count = -1
-        self.key = self.key.replace(letter, self.ALPHA[index], count)
 
     def add_text(self, text):
         self.text += text
@@ -132,9 +104,37 @@ class cypher:
         self.decrypted_text = self.decrypt()
         self.decrypted_offsets = []
 
+    def revert(self):
+        if self.old_key == "":
+            print("No reverts available")
+            return
+        self.key = self.old_key
+        self.old_key = ""
+        for _ in range(0, self.last_decrypted_offsets):
+            self.decrypted_offsets.pop(-1)
+        self.last_decrypted_offsets = 0
+        self.decrypted_text = self.decrypt()
+
+    def revert_letter(self, letter, one=True):
+        self.old = self.key
+        index = self.key.find(letter)
+        count = 1
+        if not one:
+            count = -1
+        self.key = self.key.replace(letter, self.ALPHA[index], count)
+
     def save(self, outfile_name: str):
         with open(outfile_name, "w") as file:
             file.write(self.text)
+
+    def update(self, a, b):
+        self.old_key = self.key
+        self.decrypted_offsets.append(
+            A_Z_ALPHA.find(a.upper()) - A_Z_ALPHA.find(b.upper())
+        )
+        self.last_decrypted_offsets = 1
+        self.key = self.key.replace(a.upper(), b)
+        self.decrypted_text = self.decrypt()
 
 
 def ceaser_encrypt(text: str, offset: int):
