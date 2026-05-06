@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import sys
+
 import cypher
 
 
@@ -52,12 +54,18 @@ def run_command(input, cypher: cypher.cypher):
             print(f"{command} not recognized. h or help to print help")
 
 
-print("File to read from: [ciphers.txt]")
-ans = input()
-if ans == "":
-    c = cypher.cypher()
+cipher = ""
+if not sys.stdin.isatty():
+    for line in sys.stdin:
+        cipher += line
+        c = cypher.cypher(text=cipher)
 else:
-    c = cypher.cypher(file=ans)
+    print("File to read from: [ciphers.txt]")
+    ans = input()
+    if ans == "":
+        c = cypher.cypher()
+    else:
+        c = cypher.cypher(file=ans)
 
 c.print_decrypted()
 
