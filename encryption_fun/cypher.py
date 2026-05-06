@@ -76,6 +76,11 @@ class cypher:
 
     def add_text(self, text):
         self.text += text
+        self.reset()
+
+    def clear_text(self):
+        self.text = ""
+        self.reset()
 
     def load_file(self, file):
         with open(file, "r") as file:
