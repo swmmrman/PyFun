@@ -15,7 +15,7 @@ quit       q         quit
 revert     r         Undo the last operation.
 reset                Reset the cipher.
 offsets              Print the current offsets
-save [x]   s [x]     Save to file [x]
+save [x]   s [x]     Save to file [x] save-decrypted to save the clear text
 """
     print(str)
 
@@ -70,6 +70,8 @@ def run_command(input, cypher: cypher.cypher):
             c.clear_text()
         case "save" | "s":
             c.save(parts[1])
+        case "save_Decrypted" | "sd":
+            c.save_decrypted(parts[1])
         case "help" | "h":
             print_help()
         case _:
