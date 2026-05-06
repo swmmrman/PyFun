@@ -5,12 +5,12 @@ class cypher:
         self.ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ !,.\"')(=:?"
         self.key = "ABCDEFGHIJKLMNOPQRSTUVWXYZ !,.\"')(=:?"
         # self.key = "kxvmcnophqrszyijadlegwbuft !,.\"')(=:?"
+        self.old_key = ""
+        self.decrypted_text = ""
         if len(text) > 0:
             self.text = text
         else:
             self.load_file(file)
-        self.old_key = ""
-        self.decrypted_text = ""
         self.decrypted_offsets = []
         self.last_decrypted_offsets = 1
 
