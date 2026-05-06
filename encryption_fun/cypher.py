@@ -110,3 +110,17 @@ class cypher:
         self.key = self.ALPHA
         self.decrypted_text = self.decrypt()
         self.decrypted_offsets = []
+
+
+def ceaser_encrypt(text: str, offset: int):
+    outstring = ""
+    for char in text:
+        caps = char.isupper()
+        index = (cypher.A_Z_ALPHA.find(char.upper()) + offset) % 26
+        new_char = cypher.A_Z_ALPHA[index]
+        if not caps:
+            new_char = new_char.lower()
+        outstring += new_char
+    return outstring
+
+    # def
