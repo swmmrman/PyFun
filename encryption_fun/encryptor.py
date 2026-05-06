@@ -9,7 +9,7 @@ def get_quotes(count: int):
     out_text = ""
     for i in range(0, count):
         out_text += subprocess.check_output(["fortune"]).decode("utf-8")
-        print(out_text)
+    return out_text
 
 
 def random_encode(in_str: str):
@@ -37,6 +37,6 @@ whole process.
 """
 
 if __name__ == "__main__":
-    in_text = test_text
+    in_text = get_quotes(4)
     cipher = random_encode(in_text)
     print(cipher)
