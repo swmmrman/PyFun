@@ -115,6 +115,9 @@ class cypher:
 def ceaser_encrypt(text: str, offset: int):
     outstring = ""
     for char in text:
+        if char.upper() not in A_Z_ALPHA:
+            outstring += char
+            continue
         caps = char.isupper()
         index = (A_Z_ALPHA.find(char.upper()) + offset) % 26
         new_char = A_Z_ALPHA[index]
