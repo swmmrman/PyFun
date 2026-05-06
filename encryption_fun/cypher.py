@@ -138,8 +138,8 @@ def atbash_encrypt(text: str, key: str):
     for char in text:
         case = char.isupper()
         index = A_Z_ALPHA.find(char.upper())
-        new_char = key[index] if index > 0 else char
+        new_char = key[index] if index >= 0 else char
         if not case:
             new_char = new_char.lower()
-            outstring += new_char
+        outstring += new_char
     return outstring
