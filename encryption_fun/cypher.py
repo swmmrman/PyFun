@@ -117,6 +117,10 @@ class cypher:
         self.decrypted_text = self.decrypt()
         self.decrypted_offsets = []
 
+    def save(self, outfile_name: str):
+        with open(outfile_name, "w") as file:
+            file.write(self.text)
+
 
 def ceaser_encrypt(text: str, offset: int):
     outstring = ""

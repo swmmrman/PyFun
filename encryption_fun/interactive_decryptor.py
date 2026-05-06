@@ -50,6 +50,8 @@ def run_command(input, cypher: cypher.cypher):
             c.add_text(" ".join(parts[1:]))
         case "clear_text" | "ct":
             c.clear_text()
+        case "save" | "s":
+            c.save(parts[1])
         case _:
             print(f"{command} not recognized. h or help to print help")
 
