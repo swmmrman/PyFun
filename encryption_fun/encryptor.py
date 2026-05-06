@@ -16,9 +16,12 @@ def random_encode(in_str: str):
     coin = random.randint(0, 1)
     outstring = ""
     if coin:
-        outstring = ceaser_encrypt(in_str, random.randint(26))
+        outstring = cypher.ceaser_encrypt(in_str, random.randint(0, 26))
     else:
-        outstring = atbash_encyrpt(in_str)
+        alpha = list(cypher.A_Z_ALPHA)
+        random.shuffle(alpha)
+        rand_alpha = "".join(alpha)
+        outstring = cypher.atbash_encrypt(in_str, rand_alpha)
     return outstring
 
 
