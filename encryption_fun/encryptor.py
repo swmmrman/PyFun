@@ -2,6 +2,8 @@
 import random
 import subprocess
 
+import cypher
+
 
 def get_quotes(count: int):
     out_text = ""
