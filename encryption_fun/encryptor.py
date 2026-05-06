@@ -9,6 +9,7 @@ def get_quotes(count: int):
     out_text = ""
     for i in range(0, count):
         out_text += subprocess.check_output(["fortune"]).decode("utf-8")
+        out_text += "\n"
     return out_text
 
 
