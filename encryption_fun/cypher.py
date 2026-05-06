@@ -132,5 +132,13 @@ def ceaser_encrypt(text: str, offset: int):
     return outstring
 
 
-def atbash_encrypt(in_str: str, key: str):
-    return in_str
+def atbash_encrypt(text: str, key: str):
+    outstring = ""
+    for char in text:
+        case = char.isupper()
+        index = A_Z_ALPHA.find(char.upper())
+        new_char = key[index] if index > 0 else char
+        if not case:
+            new_char = new_char.lower()
+            outstring += new_char
+    return outstring
