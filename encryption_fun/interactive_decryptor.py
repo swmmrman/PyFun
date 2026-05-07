@@ -5,7 +5,9 @@ import cypher
 
 
 def print_help():
-    str = """Commands
+    str = """
+Usage: x=y or command.  x=y to replace a lettter
+Commands
 Command    shortcut
 print      p         Print the current decrypted text
 print_key  pk        Print the current key
