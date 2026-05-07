@@ -16,6 +16,7 @@ revert     r         Undo the last operation.
 reset                Reset the cipher.
 offsets              Print the current offsets
 save [x]   s [x]     Save to file [x] save-decrypted to save the clear text
+count      cc        Get a list of character counts
 """
     print(str)
 
@@ -75,7 +76,7 @@ def run_command(input, cypher: cypher.cypher):
             c.add_text_block()
         case "clear_text" | "ct":
             c.clear_text()
-        case "count_chars" | "cc":
+        case "count" | "cc":
             c.count_chars()
         case "print_text" | "pt":
             c.print_text()
