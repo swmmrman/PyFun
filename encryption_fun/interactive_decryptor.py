@@ -82,7 +82,7 @@ def run_command(input, cypher: cypher.cypher):
             c.print_text()
         case "save" | "s":
             c.save(parts[1])
-        case "save_Decrypted" | "sd":
+        case "save_decrypted" | "sd":
             c.save_decrypted(parts[1])
         case "help" | "h":
             print_help()
