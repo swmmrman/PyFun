@@ -66,9 +66,13 @@ class cypher:
     def count_chars(self):
         print("Character counts:")
         upper_text = self.text.upper()
+        counts = {}
         for char in A_Z_ALPHA:
             count = upper_text.count(char)
-            print(f"{char}:{count} ", end="")
+            counts[char] = count
+        sorted_counts = dict(reversed(sorted(counts.items(), key=lambda item: item[1])))
+        for key in sorted_counts:
+            print(f"{sorted_counts[key]}:{key} ", end="")
         print("")
 
     def decrypt(self) -> str:
