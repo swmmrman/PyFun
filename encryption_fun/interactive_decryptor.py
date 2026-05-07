@@ -24,6 +24,13 @@ def run_command(input, cypher: cypher.cypher):
     global running
     parts = input.split(" ")
     command = parts[0].lower()
+    eq_sign = command.find("=")
+    if eq_sign > 0:
+        parts += command.split("=")
+        if len(parts[0]) > 1 or len(parts[1] > 1):
+            command = "m"
+        else:
+            command = "u"
     match command:
         case "print" | "p":
             cypher.print_decrypted()
