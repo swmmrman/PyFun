@@ -53,7 +53,7 @@ def run_command(input, cypher: cypher.cypher):
             print(c.ceaser_decrypt(int(parts[1])))
 
         case "clear_text" | "ct":
-            c.clear_text()
+            c.clear_cipher()
 
         case "count" | "cc":
             c.count_chars()
