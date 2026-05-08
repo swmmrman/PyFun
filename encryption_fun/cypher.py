@@ -184,9 +184,11 @@ class cypher:
     def save_decrypted(self, outfile_name: str):
         """
         Save the current decrypted text\n
-        No checking for vaild file path is done.\n
-        Will overwrite the file without checking.\n
         """
+        if Path(outfile_name).exists:
+            resp = input("File exists: Overwrite y/[n]").lower()
+            if resp != "y":
+                return
         with open(outfile_name, "w") as file:
             file.write(self.decrypted_text)
 
