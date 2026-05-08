@@ -1,3 +1,5 @@
+from pathlib import Path
+
 A_Z_ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
@@ -170,9 +172,12 @@ class cypher:
     def save(self, outfile_name: str):
         """
         Save the current cipher text.\n
-        No checking for vaild file path is done.\n
-        Will overwrite the file without checking.\n
         """
+        p = Path(outfile_name)
+        if p.exists():
+            resp = input("File exists: Overwrite y/[n]").lower()
+            if resp != "y":
+                return
         with open(outfile_name, "w") as file:
             file.write(self.text)
 
