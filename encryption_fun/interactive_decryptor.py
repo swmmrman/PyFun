@@ -8,21 +8,25 @@ def print_help():
     str = """
 Usage: x=y or command.  x=y to replace a lettter(s)
 Commands
-Command    shortcut
-add_block  ab        add a text block, replacing old cipher text
-ceaser [i] cd [i]    Attempt ceaser decrypt [i] is the shift
-count      cc        Get a list of character counts
-multi      m a b     update multiple at the same time.
-offsets              Print the current offsets
-print      p         Print the current decrypted text
-print_key  pk        Print the current key
-^_sorted   pks       Print the key sorted
-print_text pt        Print the original cipher text
-quit       q         quit
-reset                Reset the cipher.
-revert     r         Undo the last operation.
-save [x]   s [x]     Save to file [x] save-decrypted to save the clear text
-update     u a b     Update the a = Encypted leter, b = decrypted
+Command      Shortcut
+add_block    ab         add a text block, replacing old cipher text
+add_text     at         add text to the existing cipher
+ceaser [i]   cd [i]     Attempt ceaser decrypt [i] is the shift
+clear_text   ct         Empty the current cipher and reset state
+count        cc         Get a list of character counts
+multi        m a b      update multiple at the same time.
+offsets                 Print the current offsets
+print        p          Print the current decrypted text
+print_key    pk         Print the current key
+^_sorted     pks        Print the key sorted
+print_text   pt         Print the original cipher text
+quit         q          quit
+reset                   Reset the cipher.
+revert       r          Undo the last operation.
+save [x]     s [x]      Save cipher to file [x]
+^_decrypted  sd [name]  Same as save, but current clear text
+update       u a b      Update the a = Encypted leter, b = decrypted
+help         h          Print this message
 """
     print(str)
 
@@ -54,7 +58,7 @@ def run_command(input, cypher: cypher.cypher):
         case "count" | "cc":
             c.count_chars()
 
-        case "load_text" | "lt":
+        case "add_text" | "at":
             c.add_text(" ".join(parts[1:]))
 
         case "mutli" | "m":
