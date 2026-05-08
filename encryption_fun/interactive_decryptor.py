@@ -6,7 +6,7 @@ import cypher
 
 def print_help():
     str = """
-Usage: x=y or command.  x=y to replace a lettter
+Usage: x=y or command.  x=y to replace a lettter(s)
 Commands
 Command    shortcut
 print      p         Print the current decrypted text
@@ -35,20 +35,19 @@ def run_command(input, cypher: cypher.cypher):
         else:
             command = "u"
     match command:
-        case "print" | "p":
-            cypher.print_decrypted()
-        case "print_key" | "pk":
-            print(c.key)
-        case "print_key_sorted" | "pks":
-            print(sorted(c.key))
-        case "update" | "u":
-            if len(parts) < 3:
-                print("Missing opperand")
+        case "add_text_block" | "atb":
+            c.add_text_block()
+        case "ceaser_decrypt" | "cd":
+            if len(parts) < 2:
+                print("Missing shift")
                 return
-            cypher.update(parts[1], parts[2])
-            check = cypher.ceaser_check()
-            if check != {}:
-                print(f"Possible Ceaser cipher {check}")
+            print(c.ceaser_decrypt(int(parts[1])))
+        case "clear_text" | "ct":
+            c.clear_text()
+        case "count" | "cc":
+            c.count_chars()
+        case "load_text" | "lt":
+            c.add_text(" ".join(parts[1:]))
         case "mutli" | "m":
             if len(parts) < 3:
                 print("Missing opperand")
@@ -57,35 +56,36 @@ def run_command(input, cypher: cypher.cypher):
             check = cypher.ceaser_check()
             if check != {}:
                 print(f"Possible Ceaser cipher {check}")
+        case "offsets":
+            print(c.decrypted_offsets)
+        case "print" | "p":
+            cypher.print_decrypted()
+        case "print_key" | "pk":
+            print(c.key)
+        case "print_key_sorted" | "pks":
+            print(sorted(c.key))
+        case "print_text" | "pt":
+            c.print_text()
         case "quit" | "q":
             print("goodbye")
             running = False
-        case "ceaser_decrypt" | "cd":
-            if len(parts) < 2:
-                print("Missing shift")
-                return
-            print(c.ceaser_decrypt(int(parts[1])))
         case "revert" | "r":
             c.revert()
         case "reset":
             c.reset()
             c.print_decrypted()
-        case "offsets":
-            print(c.decrypted_offsets)
-        case "load_text" | "lt":
-            c.add_text(" ".join(parts[1:]))
-        case "add_text_block" | "atb":
-            c.add_text_block()
-        case "clear_text" | "ct":
-            c.clear_text()
-        case "count" | "cc":
-            c.count_chars()
-        case "print_text" | "pt":
-            c.print_text()
         case "save" | "s":
             c.save(parts[1])
         case "save_decrypted" | "sd":
             c.save_decrypted(parts[1])
+        case "update" | "u":
+            if len(parts) < 3:
+                print("Missing opperand")
+                return
+            cypher.update(parts[1], parts[2])
+            check = cypher.ceaser_check()
+            if check != {}:
+                print(f"Possible Ceaser cipher {check}")
         case "help" | "h":
             print_help()
         case _:
