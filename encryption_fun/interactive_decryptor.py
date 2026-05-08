@@ -80,7 +80,7 @@ def run_command(input, cypher: cypher.cypher):
             print(c.key)
 
         case "print_key_sorted" | "pks":
-            print(sorted(c.key))
+            print("".join(sorted(c.key)))
 
         case "print_text" | "pt":
             c.print_text()
