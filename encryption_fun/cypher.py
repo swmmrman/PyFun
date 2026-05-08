@@ -82,6 +82,11 @@ class cypher:
         print("")
 
     def decrypt(self) -> str:
+        """
+        Uses the current key to try decrypt the cipher text\n
+        Characters that are not decrypted print in uppercase\n
+        Returns as a string.  To print use print_decrypted
+        """
         outstring = ""
         for char in self.text:
             if char == "\n":
@@ -101,6 +106,7 @@ class cypher:
             self.decrypted_text = self.decrypt()
 
     def multi_update(self, a: str, b: str):
+        """Update multiple characters at once.  Strings must be mathching length"""
         length = len(a)
         if len(b) != length:
             print("size of strings must match")
@@ -116,17 +122,26 @@ class cypher:
             self.decrypted_text = self.decrypt()
 
     def print_decrypted(self):
+        """Prints the decrypted cipher to console"""
         print(self.decrypted_text)
 
     def print_text(self):
+        """Print the original cipher text"""
         print(self.text)
 
     def reset(self):
+        """reset everything but the original cipher"""
         self.key = self.ALPHA
         self.decrypted_text = self.decrypt()
         self.decrypted_offsets = []
 
     def revert(self):
+        """
+        Revert the last character update.\n
+        Also removes the last entry to offsets\n
+        Then reruns decrypt to fix self.decrypted_text\n
+        Can only undo the last one.
+        """
         if self.old_key == "":
             print("No reverts available")
             return
@@ -140,6 +155,10 @@ class cypher:
         self.decrypted_text = self.decrypt()
 
     def revert_letter(self, letter: str, one: bool = True):
+        """Revert any letter.\n
+        If one is not set or true.  It will revert just the first one found in the key.\n
+        If false, it will reset all instances in the key.
+        """
         self.old = self.key
         index = self.key.find(letter)
         count = 1
@@ -149,10 +168,20 @@ class cypher:
         self.key = self.key.replace(letter, self.ALPHA[index], count)
 
     def save(self, outfile_name: str):
+        """
+        Save the current cipher text.\n
+        No checking for vaild file path is done.\n
+        Will overwrite the file without checking.\n
+        """
         with open(outfile_name, "w") as file:
             file.write(self.text)
 
     def save_decrypted(self, outfile_name: str):
+        """
+        Save the current decrypted text\n
+        No checking for vaild file path is done.\n
+        Will overwrite the file without checking.\n
+        """
         with open(outfile_name, "w") as file:
             file.write(self.decrypted_text)
 
