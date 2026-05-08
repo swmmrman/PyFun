@@ -17,7 +17,7 @@ class cypher:
         self.decrypted_offsets = []
         self.last_decrypted_offsets = 1
 
-    def add_text(self, text):
+    def add_text(self, text: str):
         self.text += text
         self.reset()
 
@@ -48,7 +48,7 @@ class cypher:
 
     ### shift is the ceaser shift
 
-    def ceaser_decrypt(self, shift) -> str:
+    def ceaser_decrypt(self, shift: int) -> str:
         shift = 0 - shift
         outstring = ""
         for char in self.text:
@@ -139,7 +139,7 @@ class cypher:
         self.last_decrypted_offsets = 0
         self.decrypted_text = self.decrypt()
 
-    def revert_letter(self, letter, one=True):
+    def revert_letter(self, letter: str, one: bool = True):
         self.old = self.key
         index = self.key.find(letter)
         count = 1
@@ -156,7 +156,7 @@ class cypher:
         with open(outfile_name, "w") as file:
             file.write(self.decrypted_text)
 
-    def update(self, a, b):
+    def update(self, a: str, b: str):
         self.old_key = self.key
         self.decrypted_offsets.append(
             A_Z_ALPHA.find(a.upper()) - A_Z_ALPHA.find(b.upper())
