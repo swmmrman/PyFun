@@ -95,12 +95,12 @@ class cypher:
                     outstring += self.key[self.ALPHA.find(char.upper())]
         return outstring
 
-    def load_file(self, file):
-        with open(file, "r") as file:
+    def load_file(self, name: str):
+        with open(name, "r") as file:
             self.text = file.read()
             self.decrypted_text = self.decrypt()
 
-    def multi_update(self, a, b):
+    def multi_update(self, a: str, b: str):
         length = len(a)
         if len(b) != length:
             print("size of strings must match")
