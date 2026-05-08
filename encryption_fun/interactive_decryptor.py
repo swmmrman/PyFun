@@ -9,16 +9,20 @@ def print_help():
 Usage: x=y or command.  x=y to replace a lettter(s)
 Commands
 Command    shortcut
+add_block  ab        add a text block, replacing old cipher text
+ceaser [i] cd [i]    Attempt ceaser decrypt [i] is the shift
+count      cc        Get a list of character counts
+multi      m a b     update multiple at the same time.
+offsets              Print the current offsets
 print      p         Print the current decrypted text
 print_key  pk        Print the current key
-update     u a b     Update the a = Encypted leter, b = decrypted
-multi      m a b     update multiple at the same time.
+^_sorted   pks       Print the key sorted
+print_text pt        Print the original cipher text
 quit       q         quit
-revert     r         Undo the last operation.
 reset                Reset the cipher.
-offsets              Print the current offsets
+revert     r         Undo the last operation.
 save [x]   s [x]     Save to file [x] save-decrypted to save the clear text
-count      cc        Get a list of character counts
+update     u a b     Update the a = Encypted leter, b = decrypted
 """
     print(str)
 
@@ -35,10 +39,10 @@ def run_command(input, cypher: cypher.cypher):
         else:
             command = "u"
     match command:
-        case "add_text_block" | "atb":
+        case "add_block" | "ab":
             c.add_text_block()
 
-        case "ceaser_decrypt" | "cd":
+        case "ceaser" | "cd":
             if len(parts) < 2:
                 print("Missing shift")
                 return
