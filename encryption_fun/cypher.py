@@ -13,6 +13,7 @@ class cypher:
             self.add_text(text)
         else:
             self.load_file(file)
+
         self.decrypted_offsets = []
         self.last_decrypted_offsets = 1
 
@@ -31,7 +32,9 @@ class cypher:
                 new_line = input()
             except EOFError:
                 inputing = False
+
             in_text += new_line + "\n"
+
         self.text = in_text
         self.reset()
 
@@ -44,6 +47,7 @@ class cypher:
         return possible_offsets
 
     ### shift is the ceaser shift
+
     def ceaser_decrypt(self, shift) -> str:
         shift = 0 - shift
         outstring = ""
@@ -70,9 +74,11 @@ class cypher:
         for char in A_Z_ALPHA:
             count = upper_text.count(char)
             counts[char] = count
+
         sorted_counts = dict(reversed(sorted(counts.items(), key=lambda item: item[1])))
         for key in sorted_counts:
             print(f"{sorted_counts[key]}:{key} ", end="")
+
         print("")
 
     def decrypt(self) -> str:
@@ -99,6 +105,7 @@ class cypher:
         if len(b) != length:
             print("size of strings must match")
             return
+
         self.old_key = self.key
         self.last_decrypted_offsets = 0
         for i in range(0, length):
@@ -123,10 +130,12 @@ class cypher:
         if self.old_key == "":
             print("No reverts available")
             return
+
         self.key = self.old_key
         self.old_key = ""
         for _ in range(0, self.last_decrypted_offsets):
             self.decrypted_offsets.pop(-1)
+
         self.last_decrypted_offsets = 0
         self.decrypted_text = self.decrypt()
 
@@ -136,6 +145,7 @@ class cypher:
         count = 1
         if not one:
             count = -1
+
         self.key = self.key.replace(letter, self.ALPHA[index], count)
 
     def save(self, outfile_name: str):
@@ -164,6 +174,7 @@ def atbash_encrypt(text: str, key: str):
         new_char = key[index] if index >= 0 else char
         if not case:
             new_char = new_char.lower()
+
         outstring += new_char
     return outstring
 
@@ -174,10 +185,12 @@ def ceaser_encrypt(text: str, offset: int):
         if char.upper() not in A_Z_ALPHA:
             outstring += char
             continue
+
         caps = char.isupper()
         index = (A_Z_ALPHA.find(char.upper()) + offset) % 26
         new_char = A_Z_ALPHA[index]
         if not caps:
             new_char = new_char.lower()
+
         outstring += new_char
     return outstring
