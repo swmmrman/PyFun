@@ -65,7 +65,7 @@ class cypher:
                 outstring += char
         return outstring
 
-    def clear_text(self):
+    def clear_cipher(self):
         self.text = ""
         self.reset()
 
